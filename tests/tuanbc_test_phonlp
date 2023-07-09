@@ -1,0 +1,38 @@
+# -*- coding: utf-8 -*-
+import phonlp
+import py_vncorenlp
+
+def test_phonlp():
+
+    #text = "bầu_trời hôm_nay thật trong_xanh , bát_ngát và nhiều chim"
+    text = "Ngành Khoa học Máy tính thuộc nhóm ngành Máy tính và Công nghệ thông tin. Mục tiêu của chương trình ngành Khoa học Máy tính là đào tạo ra những kỹ sư có chất lượng cao, có khả năng thiết kế, xây dựng và triển khai những hệ thống phần mềm đáp ứng nhu cầu trong nước và quốc tế. Kỹ sư tốt nghiệp ngành Khoa học Máy tính cũng được trang bị những kiến thức cần thiết để có thể học tiếp cao học và tiến sỹ trong lĩnh vực Máy tính và Công nghệ thông tin."
+    
+
+    # Automatically download VnCoreNLP components from the original repository
+    # and save them in some local machine folder
+    #py_vncorenlp.download_model(save_dir='./vncorenlp')
+
+    # Load VnCoreNLP for word and sentence segmentation
+    rdrsegmenter = py_vncorenlp.VnCoreNLP(annotators=["wseg"], save_dir='./vncorenlp')
+
+    # Perform word and sentence segmentation
+    segmentList = rdrsegmenter.word_segment(text)
+    print(segmentList)
+    # 
+    segmentText = ' '.join(map(str, segmentList))
+
+
+    #phonlp.download('./')
+    model = phonlp.load("./pretrained_phonlp")
+    out = model.annotate(segmentText)
+    model.print_out(out)
+    
+    # model.annotate(input_file='./tests/testcase_01.txt',
+    #                output_file='./tests/testcase_01_output.txt')
+    
+    # model.annotate(input_file='./tests/testcase_01_mini.txt',
+    #                output_file='./tests/testcase_01_mini_output.txt')
+
+
+if __name__ == '__main__':
+    test_phonlp()

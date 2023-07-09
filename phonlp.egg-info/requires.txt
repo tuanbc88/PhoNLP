@@ -1,8 +1,6 @@
 transformers>=3.2.0
 torch>=1.4.0
-pytest
-gdown>=3.12.2
 numpy
+gdown>=3.12.2
+pytest
 tqdm
-py_vncorenlp
-wget
