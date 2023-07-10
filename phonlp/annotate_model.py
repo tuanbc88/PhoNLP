@@ -219,7 +219,8 @@ class JointModel(BertPreTrainedModel):
         if text is not None:
             data = [text.split(" ")]
         else:
-            f = open(input_file)
+            #f = open(input_file)
+            f = open(input_file, encoding='utf-8') # TuanBC 2023-07-10 custome 
             data = []
             for line in f:
                 line = line.strip()
@@ -294,7 +295,8 @@ class JointModel(BertPreTrainedModel):
         if text is not None:
             return (data, test_preds_pos, test_preds_ner, test_preds_dep)
         else:
-            f = open(output_file, "w")
+            #f = open(output_file, "w")
+            f = open(output_file, "w" , encoding='utf-8') # tuanbc 2023-07-10 9h00
             for i in range(len(data)):
                 for j in range(len(data[i])):
                     if output_type == "conll":

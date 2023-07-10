@@ -10,28 +10,35 @@ def test_phonlp():
 
     # Automatically download VnCoreNLP components from the original repository
     # and save them in some local machine folder
-    #py_vncorenlp.download_model(save_dir='./vncorenlp')
+    #py_vncorenlp.download_model(save_dir='E:/git-workspace/PhoNLP/vncorenlp') @#==# ko chạy đc, fai download thủ công
 
     # Load VnCoreNLP for word and sentence segmentation
-    rdrsegmenter = py_vncorenlp.VnCoreNLP(annotators=["wseg"], save_dir='./vncorenlp')
+    #rdrsegmenter = py_vncorenlp.VnCoreNLP(annotators=["wseg"], save_dir='./vncorenlp')
+    rdrsegmenter = py_vncorenlp.VnCoreNLP(annotators=["wseg"], save_dir='E:/git-workspace/PhoNLP/vncorenlp')
 
     # Perform word and sentence segmentation
     segmentList = rdrsegmenter.word_segment(text)
-    print(segmentList)
+    #print(segmentList)
     # 
     segmentText = ' '.join(map(str, segmentList))
-
+    print(segmentText)
 
     #phonlp.download('./')
-    model = phonlp.load("./pretrained_phonlp")
-    out = model.annotate(segmentText)
-    model.print_out(out)
+    model = phonlp.load("E:/git-workspace/PhoNLP/pretrained_phonlp")
     
+    
+    # Annotate a word-segmented sentence
+    #out = model.annotate(segmentText)
+    #model.print_out(out)
+    
+    # Annotate a corpus where each line represents a word-segmented sentence
     # model.annotate(input_file='./tests/testcase_01.txt',
     #                output_file='./tests/testcase_01_output.txt')
+    tmpInputFile = 'E:/git-workspace/PhoNLP/tests/data/testcase_01_mini.txt'
+    tmpOutputFile = 'E:/git-workspace/PhoNLP/tests/data/testcase_01_mini_output.txt'
     
-    # model.annotate(input_file='./tests/testcase_01_mini.txt',
-    #                output_file='./tests/testcase_01_mini_output.txt')
+    model.annotate(input_file=tmpInputFile,
+                   output_file=tmpOutputFile)
 
 
 if __name__ == '__main__':
